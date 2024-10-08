@@ -158,6 +158,58 @@ function Set-PgHost {
     return $pghost
 }
 
+function Get-DBPrefix {
+    # Выбора pghost в зависимости от тенанта
+    # Перед вызовом должен быть определен $tenant
+    if (-not $tenant) {
+        Write-Host "tenant is not defined." -ForegroundColor Red
+        exit
+    }
+
+    $prefix = $defaultDBPrefix
+
+    if ($tenantSettings.ContainsKey($tenant)) {
+        if ($tenantSettings[$tenant].ContainsKey("prefix")) {
+            $prefix = $tenantSettings[$tenant]["prefix"]
+
+            if (-not ($prefix -is [string])) {
+                Write-Host "prefix для тенанта $tenant задан в неверном формате" -ForegroundColor Red
+                exit
+            }
+        }
+    }  else {
+        Write-Host "Не заданы настройки для тенанта $tenant" -ForegroundColor Red
+        exit  
+    }
+    return $prefix
+}
+
+function Get-DBSuffix {
+    # Выбора pghost в зависимости от тенанта
+    # Перед вызовом должен быть определен $tenant
+    if (-not $tenant) {
+        Write-Host "tenant is not defined." -ForegroundColor Red
+        exit
+    }
+
+    $suffix = $defaultDBSuffix
+
+    if ($tenantSettings.ContainsKey($tenant)) {
+        if ($tenantSettings[$tenant].ContainsKey("suffix")) {
+            $suffix = $tenantSettings[$tenant]["suffix"]
+
+            if (-not ($suffix -is [string])) {
+                Write-Host "suffix для тенанта $tenant задан в неверном формате" -ForegroundColor Red
+                exit
+            }
+        }
+    }  else {
+        Write-Host "Не заданы настройки для тенанта $tenant" -ForegroundColor Red
+        exit  
+    }
+    return $suffix
+}
+
 function Set-PgPassword {
     # Запрашиваем пароль от postgreql и сохраняем его в окружение текущего терминала
 

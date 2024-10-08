@@ -40,9 +40,11 @@ $service = Set-Service
 $pghost = Set-PgHost
 $port = Set-Port
 $username = Set-Username
+$dbPrefix = Get-DBPrefix
+$dbSuffix = Get-DBSuffix
 
 # Имя базы данных
-$dbName = $dbPrefix + $service
+$dbName = $dbPrefix + $service + $dbSuffix
 
 # Путь к файлу дампа
 $dumpFile = "$baseDir\$tenant\$service\dump-$tenant-$service-$(Get-Date -Format yyyyMMddHHmm).$dumpFileExtension"

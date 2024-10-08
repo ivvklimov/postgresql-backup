@@ -30,6 +30,8 @@ $tenantSettings = @{
         "host"     = "host"
         "username" = "username"
         "port"     = 54322
+        "prefix"   = "prefix-"
+        "suffix"   = "-suffix"
     }
 }
 
@@ -48,8 +50,11 @@ $logsDir = Join-Path -Path $baseDir -ChildPath "logs"
 # Расширение файлов для дампов
 $dumpFileExtension = "sql"
 
-# Префикс для имен баз данных
-$dbPrefix = ''
-
 # Порт по умолчанию для подключения к базе сервиса
 $defaultPort = 5432
+
+# Префикс для названий баз
+$defaultDBPrefix = ""
+
+# Суффикс для названий баз
+$defaultDBSuffix = ""

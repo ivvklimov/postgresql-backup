@@ -109,6 +109,8 @@ $service = Set-Service
 $pghost = Set-PgHost
 $port = Set-Port
 $username = Set-Username
+$dbPrefix = Get-DBPrefix
+$dbSuffix = Get-DBSuffix
 
 # --------------------------------------------------------------------
 # Формирование таблицы
@@ -138,7 +140,7 @@ if ($selectedBackup) {
 # --------------------------------------------------------------------
 
 # Имя базы данных
-$dbName = $dbPrefix + $service
+$dbName = $dbPrefix + $service + $dbSuffix
 
 $pgRestoreArgumentList = (
     "--verbose --host=$pghost --port=$port " +
